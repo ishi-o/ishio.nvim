@@ -1,8 +1,4 @@
 local bufferline = require("bufferline")
-local bufferline_config = require("bufferline.config")
-
-local M = {}
-
 bufferline.setup({
 	options = {
 		mode = "buffers",
@@ -54,12 +50,3 @@ bufferline.setup({
 		-- middle_mouse_command = nil,
 	},
 })
-
-function M.toggle_mode()
-	local mode = bufferline_config.options.mode == "tabs" and "buffers" or "tabs"
-	bufferline_config.options.mode = mode
-	bufferline_config.apply(true)
-	vim.cmd.redrawtabline()
-end
-
-return M

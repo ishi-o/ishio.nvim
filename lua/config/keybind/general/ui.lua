@@ -105,7 +105,11 @@ return {
 		{
 			"<leader>u<tab>",
 			function()
-				require("config.ui.bufferline").toggle_mode()
+				local bufferline_config = require("bufferline.config")
+				local mode = bufferline_config.options.mode == "tabs" and "buffers" or "tabs"
+				bufferline_config.options.mode = mode
+				bufferline_config.apply(true)
+				vim.cmd.redrawtabline()
 			end,
 			desc = "Toggle tabline mode (buffers / tabs)",
 		},

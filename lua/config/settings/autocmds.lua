@@ -39,30 +39,6 @@ autocmd("FileType", {
 	end,
 })
 
-autocmd("BufReadPost", {
-	pattern = "*.csv",
-	callback = function()
-		vim.cmd("CsvViewEnable display_mode=border header_lnum=1")
-	end,
-	desc = "Preprocess Csv File",
-})
-
-autocmd("FileType", {
-	pattern = "csv",
-	callback = function()
-		local map = vim.keymap.set
-		map("n", "<leader>M", "<cmd>CsvViewToggle display_mode=border header_lnum=1<CR>", { buffer = true })
-	end,
-})
-
-autocmd("FileType", {
-	pattern = "typst",
-	callback = function()
-		local map = vim.keymap.set
-		map("n", "<leader>M", "<cmd>TypstPreview<CR>", { buffer = true })
-	end,
-})
-
 autocmd("LspProgress", {
 	callback = function(ev)
 		local client = vim.lsp.get_client_by_id(ev.data.client_id)
