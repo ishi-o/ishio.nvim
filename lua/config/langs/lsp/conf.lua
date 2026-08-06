@@ -43,11 +43,14 @@ M.on_attach = function(client, bufnr)
 	end
 end
 
+M.capabilities = vim.lsp.protocol.make_client_capabilities()
 local ok, blink = pcall(require, "blink.cmp")
 if ok then
-	M.capabilities = blink.get_lsp_capabilities()
-else
-	M.capabilities = {}
+	M.capabilities = vim.tbl_deep_extend("force", M.capabilities, blink.get_lsp_capabilities())
 end
+M.capabilities.textDocument.foldingRange = {
+	dynamicRegistration = false,
+	lineFoldingOnly = true,
+}
 
 return M

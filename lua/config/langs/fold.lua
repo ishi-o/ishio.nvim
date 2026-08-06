@@ -25,19 +25,6 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
 	return newVirtText
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.foldingRange = {
-	dynamicRegistration = false,
-	lineFoldingOnly = true,
-}
-
-local language_servers = vim.lsp.get_clients()
-for _, ls in ipairs(language_servers) do
-	require("lspconfig")[ls].setup({
-		capabilities = capabilities,
-	})
-end
-
 require("ufo").setup({
 	close_fold_kinds_for_ft = {
 		default = { "imports", "comment" },
