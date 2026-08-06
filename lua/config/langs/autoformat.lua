@@ -1,31 +1,5 @@
 local fmt = require("conform")
 fmt.setup({
-	formatters = {
-		xmllint = {
-			command = "xmllint",
-			args = {
-				"--format",
-				"--encode",
-				"UTF-8",
-				"--nsclean",
-				"--recover",
-				"-",
-			},
-		},
-		tidy = {
-			command = "tidy",
-			args = {
-				"-xml",
-				"-indent",
-				"--indent-spaces",
-				"4",
-				"--quiet",
-				"--tidy-mark",
-				"no",
-				"-utf8",
-			},
-		},
-	},
 	formatters_by_ft = {
 		c = { "clang-format" },
 		cpp = { "clang-format" },
@@ -35,32 +9,22 @@ fmt.setup({
 		java = { "google-java-format" },
 		javascript = { "prettier" },
 		json = { "jq" },
-		lua = { "stylua" },
 		markdown = {
 			"prettier",
-			"markdownlint-cli2",
-			"markdown-toc",
-			"injected",
+			-- "injected", -- Formats embedded code blocks using their language-specific formatters.
 		},
 		nginx = { "nginxfmt" },
 		proto = { "buf" },
-		-- python = { "ruff" },
-		-- python = { "autopep8" },
 		python = {
 			"ruff_fix",
 			"ruff_format",
 			"ruff_organize_imports",
 		},
-		rust = { "rustfmt" },
 		scss = { "prettier" },
 		toml = { "taplo" },
 		typescript = { "prettier" },
 		typst = { "typstyle" },
 		vue = { "prettier" },
-		-- xml = { "xmlformatter" },
-		-- xml = { "lsp" },
-		-- xml = { "xmllint" },
-		-- yaml = { "yamlfmt" },
 	},
 
 	format_on_save = {
