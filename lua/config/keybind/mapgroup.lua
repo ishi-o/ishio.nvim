@@ -4,7 +4,7 @@ return {
 	{ "g", group = "Goto" },
 	{ "gs", group = "Surround" },
 	{ "z", group = "Fold" },
-	{ "mp", group = "Quick substitute" },
+	{ "s", group = "Quick substitute" },
 	{ "<leader>a", group = "AI", mode = { "n", "x" } },
 	{ "<leader>b", group = "Buffer" },
 	{ "<leader>c", group = "Codes" },
