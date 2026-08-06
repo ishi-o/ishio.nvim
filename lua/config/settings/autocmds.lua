@@ -1,41 +1,5 @@
 local autocmd = vim.api.nvim_create_autocmd
 
-autocmd({ "BufRead", "BufNewFile" }, {
-	pattern = {
-		"*.png",
-		"*.jpg",
-		"*.jpeg",
-		"*.jfif",
-		"*.pjpeg",
-		"*.pjp",
-		"*.gif",
-		"*.bmp",
-		"*.dib",
-		"*.webp",
-		"*.tiff",
-		"*.tif",
-		"*.ico",
-		"*.svg",
-		"*.svgz",
-		"*.heic",
-		"*.heif",
-		"*.avif",
-		"*.psd",
-		"*.xpm",
-		"*.xbm",
-		"*.pcx",
-		"*.tga",
-		"*.hdr",
-		"*.exr",
-		"*.raw",
-		"*.cr2",
-		"*.nef",
-	},
-	callback = function()
-		vim.bo.filetype = "image"
-	end,
-})
-
 autocmd("FileType", {
 	pattern = "http",
 	callback = function()
