@@ -34,6 +34,9 @@ return {
 		"folke/lazydev.nvim",
 		lazy = true,
 		ft = "lua",
+		config = function()
+			require("config.langs.lsp.extra.lazydev")
+		end,
 	},
 	{
 		"mfussenegger/nvim-jdtls",

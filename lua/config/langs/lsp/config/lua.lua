@@ -1,5 +1,4 @@
 local conf = require("config.langs.lsp.conf")
-
 vim.lsp.config("lua_ls", {
 	on_attach = conf.on_attach,
 	capabilities = conf.capabilities,
@@ -41,14 +40,5 @@ vim.lsp.config("lua_ls", {
 				enable = false,
 			},
 		},
-	},
-})
-
-require("lazydev").setup({
-	library = {
-		"lazy.nvim",
-		{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
-		{ path = "LazyVim",            words = { "LazyVim" } },
-		{ path = "snacks.nvim",        words = { "Snacks" } },
 	},
 })
