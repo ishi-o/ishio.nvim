@@ -1,4 +1,4 @@
-local autocmd = vim.api.nvim_create_autocmd
+local autocmd = _G.UserUtils.autocmd
 
 autocmd("FileType", {
 	pattern = "http",

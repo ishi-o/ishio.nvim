@@ -98,4 +98,16 @@ return {
 		end,
 		desc = "Colorschemes",
 	},
+	{
+		cond = function()
+			return _G.UserUtils.plugin_installed("bufferline.nvim")
+		end,
+		{
+			"<leader>u<tab>",
+			function()
+				require("config.ui.bufferline").toggle_mode()
+			end,
+			desc = "Toggle tabline mode (buffers / tabs)",
+		},
+	}
 }

@@ -1,7 +1,7 @@
 return {
 	{
 		cond = function()
-			return _G.plugin_installed("grug-far.nvim")
+			return _G.UserUtils.plugin_installed("grug-far.nvim")
 		end,
 		{
 			"<leader>ss",
@@ -21,7 +21,7 @@ return {
 	},
 	{
 		cond = function()
-			return _G.plugin_installed("substitute.nvim")
+			return _G.UserUtils.plugin_installed("substitute.nvim")
 		end,
 		{ "s", '<cmd>lua require("substitute").operator()<CR>', desc = "Substitute in operator mode" },
 		{ "ss", '<cmd>lua require("substitute").line()<CR>', desc = "Substitute curr line" },

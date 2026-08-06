@@ -1,7 +1,7 @@
 return {
 	{
 		cond = function()
-			return _G.plugin_installed("mini.surround")
+			return _G.UserUtils.plugin_installed("mini.surround")
 		end,
 		{ "gsa", desc = "Add Surrounding", mode = { "n", "x" } },
 		{ "gsd", desc = "Delete Surrounding" },
@@ -13,7 +13,7 @@ return {
 	},
 	{
 		cond = function()
-			return _G.plugin_installed("nvim-treesitter-textobjects")
+			return _G.UserUtils.plugin_installed("nvim-treesitter-textobjects")
 		end,
 		{
 			"am",

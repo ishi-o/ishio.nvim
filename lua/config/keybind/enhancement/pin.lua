@@ -12,7 +12,7 @@ end
 return {
 	{
 		cond = function()
-			return _G.plugin_installed("harpoon")
+			return _G.UserUtils.plugin_installed("harpoon")
 		end,
 		{
 			"<leader>pp",

@@ -1,4 +1,5 @@
 local lint = require("lint")
+local autocmd = _G.UserUtils.autocmd
 lint.linters_by_ft = {
 	c = { "cpplint" },
 	cpp = { "cpplint" },
@@ -18,7 +19,7 @@ lint.linters.cpplint.args = {
 	"--filter=-whitespace/tab,-whitespace/indent",
 	"--linelength=120",
 }
-vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost" }, {
+autocmd({ "BufWritePost", "BufReadPost" }, {
 	callback = function()
 		lint.try_lint()
 	end,

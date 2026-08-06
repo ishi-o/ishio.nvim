@@ -1,5 +1,15 @@
-require("bufferline").setup({
+local bufferline = require("bufferline")
+local bufferline_config = require("bufferline.config")
+
+local M = {}
+
+bufferline.setup({
 	options = {
+		mode = "buffers",
+		custom_filter = function(buf)
+			return bufferline_config.options.mode ~= "buffers"
+				or vim.tbl_contains(vim.fn.tabpagebuflist(), buf)
+		end,
 		hover = {
 			enabled = true,
 			delay = 200,
@@ -44,3 +54,12 @@ require("bufferline").setup({
 		-- middle_mouse_command = nil,
 	},
 })
+
+function M.toggle_mode()
+	local mode = bufferline_config.options.mode == "tabs" and "buffers" or "tabs"
+	bufferline_config.options.mode = mode
+	bufferline_config.apply(true)
+	vim.cmd.redrawtabline()
+end
+
+return M

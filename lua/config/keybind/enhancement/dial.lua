@@ -1,7 +1,7 @@
 return {
 	{
 		cond = function()
-			return _G.plugin_installed("dial.nvim")
+			return _G.UserUtils.plugin_installed("dial.nvim")
 		end,
 		{
 			"<C-a>",

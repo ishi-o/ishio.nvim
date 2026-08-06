@@ -1,7 +1,7 @@
 return {
 	{
 		cond = function()
-			return _G.plugin_installed("todo-comments.nvim")
+			return _G.UserUtils.plugin_installed("todo-comments.nvim")
 		end,
 		{
 			"]t",

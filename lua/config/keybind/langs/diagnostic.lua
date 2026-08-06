@@ -52,7 +52,7 @@ return {
 	},
 	{
 		cond = function()
-			return _G.plugin_installed("trouble.nvim")
+			return _G.UserUtils.plugin_installed("trouble.nvim")
 		end,
 		{ "<leader>xx", "<cmd>Trouble diagnostics toggle<CR>", desc = "Show: global diagnostics (trouble)" },
 		{
