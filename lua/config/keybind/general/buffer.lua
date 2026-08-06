@@ -50,14 +50,14 @@ return {
 		{ "<leader>bl", "<cmd>b#<CR>", desc = "Goto: last buffer" },
 		{ "<leader>bd", smart_bd, desc = "Delete curr buffer" },
 		{
-			"<leader>bc",
+			"<leader>bC",
 			function()
 				vim.fn.setreg("+", vim.fn.expand("%:p"))
 			end,
 			desc = "Copy curr buffer absolute path",
 		},
 		{
-			"<leader>bC",
+			"<leader>bc",
 			function()
 				vim.fn.setreg("+", vim.fn.expand("%:~:."))
 			end,
