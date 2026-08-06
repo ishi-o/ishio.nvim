@@ -1,33 +1,6 @@
 local fmt = require("conform")
 fmt.setup({
 	formatters = {
-		sqlfluff = {
-			args = function()
-				local filetype = vim.api.nvim_get_option_value("filetype", { buf = 0, scope = "local" })
-				filetype = string.lower(filetype)
-				local dialect_map = {
-					sql = "ansi",
-					mysql = "mysql",
-					pgsql = "postgres",
-					postgresql = "postgres",
-					bigquery = "bigquery",
-				}
-				local chosen_dialect = dialect_map[filetype] or "ansi"
-				return {
-					"format",
-					"--dialect=" .. chosen_dialect,
-					"-",
-				}
-			end,
-			cwd = function(self, ctx)
-				local root = require("conform.util").root_file({
-					".sqlfluff",
-					"pyproject.toml",
-					".git",
-				})(self, ctx)
-				return root or vim.fn.expand("~/.config/sqlfluff")
-			end,
-		},
 		xmllint = {
 			command = "xmllint",
 			args = {
@@ -70,10 +43,7 @@ fmt.setup({
 			"markdown-toc",
 			"injected",
 		},
-		mysql = { "sqlfluff" },
 		nginx = { "nginxfmt" },
-		pgsql = { "sqlfluff" },
-		plsql = { "sqlfluff" },
 		proto = { "buf" },
 		-- python = { "ruff" },
 		-- python = { "autopep8" },
@@ -84,8 +54,6 @@ fmt.setup({
 		},
 		rust = { "rustfmt" },
 		scss = { "prettier" },
-		-- sql = { "sql-formatter" },
-		sql = { "sqlfluff" },
 		toml = { "taplo" },
 		typescript = { "prettier" },
 		typst = { "typstyle" },

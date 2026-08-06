@@ -29,8 +29,6 @@ require("mason-lspconfig").setup({
 		"typos_lsp",
 		"ruff",
 		"rust_analyzer",
-		-- "sqlls",
-		-- "sqls",
 		"stylua",
 		"texlab",
 		"vtsls",
@@ -61,7 +59,6 @@ local other_tools = {
 	"markdownlint-cli2",
 	"proselint",
 	"shellcheck",
-	-- "sqruff",
 	"stylelint",
 	"yamllint",
 	-- Formatters
@@ -79,8 +76,6 @@ local other_tools = {
 	"prettierd",
 	"rustfmt",
 	"shfmt",
-	"sqlfluff",
-	-- "sql-formatter",
 	"typstyle",
 	-- "yamlfmt",
 }
