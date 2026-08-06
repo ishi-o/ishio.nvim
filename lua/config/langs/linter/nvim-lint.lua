@@ -1,14 +1,11 @@
 local lint = require("lint")
 lint.linters_by_ft = {
-	-- bash = { "shellcheck" },
-	bash = {},
 	c = { "cpplint" },
 	cpp = { "cpplint" },
 	css = { "stylelint" },
 	docker = { "hadolint" },
 	go = { "golangcilint" },
 	html = { "htmlhint" },
-	-- java = { "checkstyle" },
 	javascript = { "eslint_d" },
 	javascriptreact = { "eslint_d" },
 	json = { "jsonlint" },
@@ -17,17 +14,9 @@ lint.linters_by_ft = {
 	-- proto = { "buf_lint" },	-- lsp support
 	python = { "ruff" },
 	scss = { "stylelint" },
-	sh = { "shellcheck" },
 	typescript = { "eslint_d" },
 	typescriptreact = { "eslint_d" },
 	yaml = { "yamllint" },
-	zsh = { "shellcheck" },
-}
-lint.linters.checkstyle.args = {
-	"-c",
-	os.getenv("HOME") .. "/.config/checkstyle/checkstyle.xml",
-	"-f",
-	"json",
 }
 lint.linters.cpplint.args = {
 	"--filter=-whitespace/tab,-whitespace/indent",

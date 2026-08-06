@@ -27,7 +27,6 @@ fmt.setup({
 		},
 	},
 	formatters_by_ft = {
-		bash = { "shfmt" },
 		c = { "clang-format" },
 		cpp = { "clang-format" },
 		css = { "prettier" },

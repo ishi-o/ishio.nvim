@@ -48,7 +48,6 @@ local other_tools = {
 	"java-debug-adapter",
 	"java-test",
 	-- Linters
-	"checkstyle",
 	"cpplint",
 	"eslint_d",
 	"hadolint",
@@ -89,7 +88,6 @@ for _, tool_name in ipairs(other_tools) do
 end
 
 local simple_servers = {
-	"bashls",
 	"clangd",
 	"cssls",
 	"dockerls",
@@ -114,6 +112,7 @@ for _, server in ipairs(simple_servers) do
 end
 
 local custom_confs = {
+	{ module = "bash", servers = { "bashls" } },
 	{ module = "go", servers = { "gopls" } },
 	{ module = "java", servers = { "jdtls" } },
 	{ module = "js-family", servers = { "ts_ls", "jsonls" } },
