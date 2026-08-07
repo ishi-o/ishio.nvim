@@ -21,6 +21,11 @@ noice.setup({
 	cmdline = {
 		enabled = true,
 		view = "cmdline",
+		format = {
+			input = {
+				view = "cmdline"
+			}
+		}
 	},
 	lsp = {
 		enabled = true,

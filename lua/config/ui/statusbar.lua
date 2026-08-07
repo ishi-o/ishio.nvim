@@ -122,7 +122,6 @@ lualine.setup({
 				"snacks_picker_list",
 				"snacks_layout_box",
 				"toggleterm",
-				"trouble",
 				"aerial",
 				"snacks_terminal",
 				"grug-far",
