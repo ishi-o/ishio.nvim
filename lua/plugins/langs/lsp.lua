@@ -42,9 +42,6 @@ return {
 		"mfussenegger/nvim-jdtls",
 		lazy = true,
 		ft = { "java" },
-		dependencies = {
-			"mfussenegger/nvim-dap",
-		},
 	},
 	{
 		"qvalentin/helm-ls.nvim",

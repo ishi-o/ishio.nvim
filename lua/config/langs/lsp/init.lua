@@ -15,6 +15,7 @@ local tools = {
 	"helm-ls",
 	"html-lsp",
 	"jdtls",
+	"java-test",
 	"json-lsp",
 	"lemminx",
 	"lua-language-server",
@@ -31,12 +32,6 @@ local tools = {
 	"vtsls",
 	"vue-language-server",
 	"yaml-language-server",
-	-- DAPs
-	"codelldb",
-	"debugpy",
-	"delve",
-	"java-debug-adapter",
-	"java-test",
 	-- Linters
 	"cpplint",
 	"eslint_d",

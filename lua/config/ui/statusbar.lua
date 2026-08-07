@@ -41,7 +41,6 @@ local mode_groups = {
 }
 
 local disabled_filetypes = {
-	["dap-repl"] = true,
 	NvimTree = true,
 	alpha = true,
 	dashboard = true,

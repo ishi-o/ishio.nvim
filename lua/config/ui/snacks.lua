@@ -1,6 +1,6 @@
 require("snacks").setup({
 	bigfile = { enabled = true },
-	dashboard = { enabled = true },
+	dashboard = { enabled = false },
 	dim = { enabled = false },
 	explorer = { enabled = false },
 	indent = { enabled = true },

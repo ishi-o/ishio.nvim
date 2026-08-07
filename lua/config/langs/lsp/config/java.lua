@@ -31,7 +31,6 @@ end
 
 local mason_share = vim.fn.stdpath("data") .. "/mason/share"
 local bundles = {}
-vim.list_extend(bundles, glob_jars(mason_share .. "/java-debug-adapter/*.jar"))
 vim.list_extend(bundles, glob_jars(mason_share .. "/java-test/*.jar"))
 vim.lsp.config("jdtls", {
 	on_attach = function(client, bufnr)
