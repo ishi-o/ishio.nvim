@@ -1,19 +1,6 @@
 local autocmd = _G.UserUtils.autocmd
 local pending_tab_buffers = {}
 
--- Native command-line completion trigger is kept for later re-enablement.
--- It is temporarily disabled while blink.cmp handles cmdline completion.
---[[
-autocmd("CmdlineChanged", {
-	callback = function()
-		local cmdtype = vim.fn.getcmdtype()
-		if cmdtype == ":" or cmdtype == "/" or cmdtype == "?" then
-			vim.fn.wildtrigger()
-		end
-	end,
-})
-]]
-
 autocmd({ "BufEnter", "BufWinEnter" }, {
 	callback = _G.UserUtils.track_tab_buffers,
 })

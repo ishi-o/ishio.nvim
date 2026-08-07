@@ -40,7 +40,7 @@ vim.opt.foldlevelstart = 99
 vim.opt.foldenable = true
 vim.opt.fillchars = "eob: ,fold: ,foldopen:,foldsep: ,foldinner: ,foldclose:"
 vim.opt.foldtext =
-	"v:lua.vim.fn.printf(' %s  [%d lines]', substitute(getline(v:foldstart), '\\t', repeat(' ', &tabstop), 'g'), v:foldend - v:foldstart + 1)"
+"v:lua.vim.fn.printf(' %s  [%d lines]', substitute(getline(v:foldstart), '\\t', repeat(' ', &tabstop), 'g'), v:foldend - v:foldstart + 1)"
 
 vim.opt.wrap = true
 vim.opt.breakindent = true
@@ -55,19 +55,7 @@ vim.opt.splitkeep = "screen"
 vim.opt.termguicolors = true
 vim.opt.background = "light"
 -- vim.opt.background = "dark"
-
--- Native completion options are kept here for later re-enablement.
--- They are temporarily disabled while blink.cmp is active.
---[[
--- Preselect the first item without inserting it until completion is accepted.
-vim.opt.completeopt = "menu,menuone,noinsert,popup,fuzzy"
-
--- Use Neovim's native popup menu for command-line completion and trigger it as
--- the command/search pattern changes (see CmdlineChanged below).
-vim.opt.wildmenu = true
-vim.opt.wildmode = "noselect:lastused,full"
-vim.opt.wildoptions = "pum,fuzzy,tagfile"
-]]
+vim.opt.scrolloff = math.floor(vim.o.lines * 0.2)
 
 vim.opt.diffopt = "filler,context:3,internal,algorithm:patience"
 
