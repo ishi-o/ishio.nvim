@@ -19,13 +19,6 @@ M.on_attach = function(client, bufnr)
 	map("n", "<leader>C", vim.lsp.buf.code_action, { buffer = bufnr })
 	map("n", "<leader>cc", vim.lsp.buf.code_action, { buffer = bufnr })
 
-	if client.server_capabilities.documentSymbolProvider then
-		local ok, navic = pcall(require, "nvim-navic")
-		if ok then
-			navic.attach(client, bufnr)
-		end
-	end
-
 	if client:supports_method("textDocument/inlayHint") then
 		vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
 	end
