@@ -37,10 +37,19 @@ return {
 		{
 			"<leader>ee",
 			function()
-				vim.api.nvim_feedkeys(":", "n", false)
-				vim.defer_fn(function()
-					vim.api.nvim_feedkeys("edit ", "n", false)
-				end, 50)
+				vim.ui.input({ prompt = "Edit file: " }, function(filename)
+					if filename == nil then
+						return
+					end
+					if filename == "" then
+						vim.cmd.enew()
+						return
+					end
+					vim.api.nvim_cmd({
+						cmd = "edit",
+						args = { filename },
+					}, {})
+				end)
 			end,
 			desc = "New buffer (input filename)",
 		},
