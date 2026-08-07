@@ -1,11 +1,5 @@
 return {
 	{
-		"numToStr/Comment.nvim",
-		config = function()
-			require("config.langs.comment.comment")
-		end,
-	},
-	{
 		"danymat/neogen",
 		lazy = true,
 		module = "neogen",

@@ -1,6 +1,5 @@
 return {
 	require("config.keybind.enhancement.codemap"),
-	require("config.keybind.enhancement.dial"),
 	require("config.keybind.enhancement.explorer"),
 	require("config.keybind.enhancement.notify"),
 	require("config.keybind.enhancement.pairs"),

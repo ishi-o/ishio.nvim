@@ -43,5 +43,4 @@ return {
 		end,
 		desc = "Rewrite structure",
 	},
-	{ "<leader>fv", desc = "Find python envs" },
 }

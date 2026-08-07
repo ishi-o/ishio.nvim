@@ -56,6 +56,19 @@ vim.opt.termguicolors = true
 vim.opt.background = "light"
 -- vim.opt.background = "dark"
 
+-- Native completion options are kept here for later re-enablement.
+-- They are temporarily disabled while blink.cmp is active.
+--[[
+-- Preselect the first item without inserting it until completion is accepted.
+vim.opt.completeopt = "menu,menuone,noinsert,popup,fuzzy"
+
+-- Use Neovim's native popup menu for command-line completion and trigger it as
+-- the command/search pattern changes (see CmdlineChanged below).
+vim.opt.wildmenu = true
+vim.opt.wildmode = "noselect:lastused,full"
+vim.opt.wildoptions = "pum,fuzzy,tagfile"
+]]
+
 vim.opt.diffopt = "filler,context:3,internal,algorithm:patience"
 
 vim.opt.updatetime = 600

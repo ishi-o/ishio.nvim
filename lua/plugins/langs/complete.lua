@@ -6,7 +6,7 @@ return {
 		dependencies = {
 			{
 				"rafamadriz/friendly-snippets",
-				optional = true
+				enabled = false,
 			},
 		},
 		config = function()

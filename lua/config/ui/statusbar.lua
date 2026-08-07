@@ -194,12 +194,7 @@ lualine.setup({
 			},
 		},
 		lualine_c = {},
-		lualine_x = {
-			-- {
-			-- 	require("noice").api.status.message.get_hl,
-			-- 	cond = require("noice").api.status.message.has,
-			-- },
-		},
+		lualine_x = {},
 		lualine_y = {},
 		lualine_z = {},
 	},

@@ -1,6 +1,19 @@
 local autocmd = _G.UserUtils.autocmd
 local pending_tab_buffers = {}
 
+-- Native command-line completion trigger is kept for later re-enablement.
+-- It is temporarily disabled while blink.cmp handles cmdline completion.
+--[[
+autocmd("CmdlineChanged", {
+	callback = function()
+		local cmdtype = vim.fn.getcmdtype()
+		if cmdtype == ":" or cmdtype == "/" or cmdtype == "?" then
+			vim.fn.wildtrigger()
+		end
+	end,
+})
+]]
+
 autocmd({ "BufEnter", "BufWinEnter" }, {
 	callback = _G.UserUtils.track_tab_buffers,
 })
@@ -52,80 +65,12 @@ autocmd("TabClosed", {
 })
 
 autocmd("FileType", {
-	pattern = "http",
-	callback = function()
-		local map = vim.keymap.set
-		map("n", "<leader>Rb", "<cmd>lua require('kulala').scratchpad()<CR>", { buffer = true })
-		map("n", "<leader>Rc", "<cmd>lua require('kulala').copy()<CR>", { buffer = true })
-		map("n", "<leader>RC", "<cmd>lua require('kulala').from_curl()<CR>", { buffer = true })
-		map("n", "<leader>Re", "<cmd>lua require('kulala').set_selected_env()<CR>", { buffer = true })
-		map("n", "<leader>Rg", "<cmd>lua require('kulala').download_graphql_schema()<CR>", { buffer = true })
-		map("n", "<leader>Ri", "<cmd>lua require('kulala').inspect()<CR>", { buffer = true })
-		map("n", "<leader>Rn", "<cmd>lua require('kulala').jump_next()<CR>", { buffer = true })
-		map("n", "<leader>Rp", "<cmd>lua require('kulala').jump_prev()<CR>", { buffer = true })
-		map("n", "<leader>Rq", "<cmd>lua require('kulala').close()<CR>", { buffer = true })
-		map("n", "<leader>Rr", "<cmd>lua require('kulala').replay()<CR>", { buffer = true })
-		map("n", "<leader>Rs", "<cmd>lua require('kulala').run()<CR>", { buffer = true })
-		map("n", "<leader>RS", "<cmd>lua require('kulala').show_stats()<CR>", { buffer = true })
-		map("n", "<leader>Rt", "<cmd>lua require('kulala').toggle_view()<CR>", { buffer = true })
-	end,
-})
-
-autocmd("FileType", {
-	pattern = "python",
-	callback = function()
-		local map = vim.keymap.set
-		map("n", "<leader>cv", "<cmd>:VenvSelect<CR>", { buffer = true })
-	end,
-})
-
-autocmd("FileType", {
 	pattern = "markdown",
 	callback = function()
 		local map = vim.keymap.set
 		map("i", "（", "（）<Esc>i", { buffer = true, silent = true, desc = "Insert pair （）" })
 		map("i", "【", "【】<Esc>i", { buffer = true, silent = true, desc = "Insert pair 【】" })
 		map("i", "《", "《》<Esc>i", { buffer = true, silent = true, desc = "Insert pair 《》" })
-		map("n", "<leader>M", "<cmd>MarkdownPreview<CR>", { buffer = true })
-	end,
-})
-
-autocmd("LspProgress", {
-	callback = function(ev)
-		local client = vim.lsp.get_client_by_id(ev.data.client_id)
-		local name = client and client.name or "LSP"
-		local value = ev.data.params and ev.data.params.value
-		if not value then
-			return
-		end
-
-		local parts = {}
-		if value.kind == "end" then
-			table.insert(parts, "Done")
-		else
-			if value.title and value.title ~= "" then
-				table.insert(parts, value.title)
-			end
-			if value.message and value.message ~= "" then
-				table.insert(parts, value.message)
-			end
-			if value.percentage then
-				table.insert(parts, string.format("(%d%%%%)", value.percentage))
-			end
-		end
-
-		if #parts == 0 then
-			return
-		end
-
-		local msg = table.concat(parts, " ")
-		vim.api.nvim_echo({ { ("[%s] %s"):format(name, msg) } }, false, {
-			id = ("progress-lsp-%s-%s"):format(ev.data.client_id, value.title or value.kind or "progress"),
-			kind = "progress",
-			title = ("[%s] %s"):format(name, value.title or "Progress"),
-			status = value.kind == "end" and "success" or "running",
-			percent = value.percentage,
-		})
 	end,
 })
 
