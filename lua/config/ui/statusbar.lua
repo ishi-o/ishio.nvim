@@ -4,6 +4,7 @@ local autocmd = _G.UserUtils.autocmd
 
 local mode_names = {
 	n = "NORMAL",
+	nt = "NORMAL",
 	no = "OP-PENDING",
 	v = "VISUAL",
 	V = "V-LINE",
@@ -23,6 +24,7 @@ local mode_names = {
 
 local mode_groups = {
 	n = "MiniStatuslineModeNormal",
+	nt = "MiniStatuslineModeNormal",
 	no = "MiniStatuslineModeNormal",
 	i = "MiniStatuslineModeInsert",
 	v = "MiniStatuslineModeVisual",
@@ -78,7 +80,7 @@ function M.render()
 		if type(status) == "table" then
 			local changes = {}
 			for _, item in ipairs({
-				{ key = "added", prefix = "+", highlight = "GitSignsAdd" },
+				{ key = "added",   prefix = "+", highlight = "GitSignsAdd" },
 				{ key = "changed", prefix = "~", highlight = "GitSignsChange" },
 				{ key = "removed", prefix = "-", highlight = "GitSignsDelete" },
 			}) do
@@ -119,9 +121,9 @@ function M.render()
 		local counts = vim.diagnostic.count(bufnr)
 		for _, item in ipairs({
 			{ severity = vim.diagnostic.severity.ERROR, icon = "", highlight = "DiagnosticError" },
-			{ severity = vim.diagnostic.severity.WARN,  icon = "", highlight = "DiagnosticWarn" },
-			{ severity = vim.diagnostic.severity.INFO,  icon = "", highlight = "DiagnosticInfo" },
-			{ severity = vim.diagnostic.severity.HINT,  icon = "", highlight = "DiagnosticHint" },
+			{ severity = vim.diagnostic.severity.WARN, icon = "", highlight = "DiagnosticWarn" },
+			{ severity = vim.diagnostic.severity.INFO, icon = "", highlight = "DiagnosticInfo" },
+			{ severity = vim.diagnostic.severity.HINT, icon = "", highlight = "DiagnosticHint" },
 		}) do
 			local count = counts[item.severity] or 0
 			if count > 0 then
