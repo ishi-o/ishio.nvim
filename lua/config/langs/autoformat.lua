@@ -9,6 +9,7 @@ fmt.setup({
 		java = { "google-java-format" },
 		javascript = { "prettier" },
 		json = { "jq" },
+		lua = { "stylua" },
 		markdown = {
 			"prettier",
 			-- "injected", -- Formats embedded code blocks using their language-specific formatters.

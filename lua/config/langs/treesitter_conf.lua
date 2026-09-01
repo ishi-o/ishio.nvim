@@ -51,7 +51,7 @@ M.fts = {
 	"vimdoc",
 	"vue",
 	"xml",
-	"yaml",
+	"yaml", -- GitHub Actions workflows use the YAML parser.
 }
 
 return M

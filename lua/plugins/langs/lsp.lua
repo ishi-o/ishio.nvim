@@ -11,7 +11,7 @@ return {
 			},
 		},
 		config = function()
-			require("config.langs.lsp.init")
+			require("config.langs.lsp.init").setup()
 		end,
 	},
 	{
