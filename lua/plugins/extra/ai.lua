@@ -1,10 +1,21 @@
 return {
   {
-    "ishi-o/mini.codex",
+    dir = "~/Code/mini.codex/",
     cmd = "Codex",
     config = function()
-      require("mini.codex").setup()
+      require("mini.codex").setup({
+        input = {
+          enabled = true,
+        },
+        output = {
+          enabled = true,
+        },
+      })
     end,
+  },
+  {
+    dir = "~/Code/codex-prompt-lsp/",
+    opts = {},
   },
   {
     "ravitemer/mcphub.nvim",
