@@ -9,7 +9,7 @@ return {
     },
     event = { "User KittyScrollbackLaunch" },
     config = function()
-      require("config.extra.kitty")
+      require("config.extra.kitty").setup()
     end,
   },
 }

@@ -1,28 +1,31 @@
 local hlset = vim.api.nvim_set_hl
 local autocmd = _G.UserUtils.autocmd
-vim.g.everforest_background = "soft"
+local M = {}
 
-vim.cmd("colorscheme everforest")
-hlset(0, "NormalFloat", { bg = "#E8DFC8", fg = "#5C6A72" })
-hlset(0, "FloatBorder", { link = "Normal" })
+function M.setup()
+  vim.g.everforest_background = "soft"
 
-hlset(0, "DiffText", { bg = "#A8D5B1", fg = "#24292F" })
--- hlset(0, "DiffText", { bg = "#9ED9A8", fg = "#24292F" })
-hlset(0, "VirtualTextOk", { link = "DiagnosticOk" })
-hlset(0, "VirtualTextHint", { link = "DiagnosticHint" })
-hlset(0, "VirtualTextInfo", { link = "DiagnosticInfo" })
-hlset(0, "VirtualTextWarning", { link = "DiagnosticWarning" })
-hlset(0, "VirtualTextError", { link = "DiagnosticError" })
-autocmd("OptionSet", {
-  pattern = "background",
-  callback = function()
-    hlset(0, "DiffText", { bg = "#A8D5B1", fg = "#24292F" })
-    hlset(0, "VirtualTextOk", { link = "DiagnosticOk" })
-    hlset(0, "VirtualTextHint", { link = "DiagnosticHint" })
-    hlset(0, "VirtualTextInfo", { link = "DiagnosticInfo" })
-    hlset(0, "VirtualTextWarning", { link = "DiagnosticWarning" })
-    hlset(0, "VirtualTextError", { link = "DiagnosticError" })
-  end,
-})
+  vim.cmd("colorscheme everforest")
+  hlset(0, "NormalFloat", { bg = "#E8DFC8", fg = "#5C6A72" })
+  hlset(0, "FloatBorder", { link = "Normal" })
 
--- vim.cmd("colorscheme tokyonight")
+  hlset(0, "DiffText", { bg = "#A8D5B1", fg = "#24292F" })
+  hlset(0, "VirtualTextOk", { link = "DiagnosticOk" })
+  hlset(0, "VirtualTextHint", { link = "DiagnosticHint" })
+  hlset(0, "VirtualTextInfo", { link = "DiagnosticInfo" })
+  hlset(0, "VirtualTextWarning", { link = "DiagnosticWarning" })
+  hlset(0, "VirtualTextError", { link = "DiagnosticError" })
+  autocmd("OptionSet", {
+    pattern = "background",
+    callback = function()
+      hlset(0, "DiffText", { bg = "#A8D5B1", fg = "#24292F" })
+      hlset(0, "VirtualTextOk", { link = "DiagnosticOk" })
+      hlset(0, "VirtualTextHint", { link = "DiagnosticHint" })
+      hlset(0, "VirtualTextInfo", { link = "DiagnosticInfo" })
+      hlset(0, "VirtualTextWarning", { link = "DiagnosticWarning" })
+      hlset(0, "VirtualTextError", { link = "DiagnosticError" })
+    end,
+  })
+end
+
+return M

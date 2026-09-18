@@ -35,7 +35,7 @@ return {
     lazy = true,
     ft = "lua",
     config = function()
-      require("config.langs.lsp.extra.lazydev")
+      require("config.langs.lsp.extra.lazydev").setup()
     end,
   },
   {
@@ -48,7 +48,7 @@ return {
     lazy = true,
     ft = "helm",
     config = function()
-      require("config.langs.lsp.extra.helm")
+      require("config.langs.lsp.extra.helm").setup()
     end,
   },
 }

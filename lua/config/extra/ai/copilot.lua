@@ -1,5 +1,11 @@
-local ok, copilot = pcall(require, "copilot")
-if ok then
+local M = {}
+
+function M.setup()
+  local ok, copilot = pcall(require, "copilot")
+  if not ok then
+    return
+  end
+
   copilot.setup({
     suggestion = {
       enabled = true,
@@ -21,3 +27,5 @@ if ok then
     },
   })
 end
+
+return M

@@ -2,7 +2,7 @@ return {
   {
     "stevearc/conform.nvim",
     config = function()
-      require("config.langs.autoformat")
+      require("config.langs.autoformat").setup()
     end,
   },
 }

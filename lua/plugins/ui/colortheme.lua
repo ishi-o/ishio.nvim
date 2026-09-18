@@ -4,7 +4,7 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
-      require("config.ui.colortheme")
+      require("config.ui.colortheme").setup()
     end,
   },
 }

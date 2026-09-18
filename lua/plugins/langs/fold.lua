@@ -5,7 +5,7 @@ return {
       "kevinhwang91/promise-async",
     },
     config = function()
-      require("config.langs.fold")
+      require("config.langs.fold").setup()
     end,
   },
 }

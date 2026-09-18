@@ -1,5 +1,11 @@
-local ok, grug_far = pcall(require, "grug-far")
-if ok then
+local M = {}
+
+function M.setup()
+  local ok, grug_far = pcall(require, "grug-far")
+  if not ok then
+    return
+  end
+
   grug_far.setup({
     windowCreationCommand = (function()
       local width = math.floor(vim.o.columns * 0.35)
@@ -7,3 +13,5 @@ if ok then
     end)(),
   })
 end
+
+return M

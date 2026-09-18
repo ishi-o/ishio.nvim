@@ -1,7 +1,13 @@
-require("lazydev").setup({
-  library = {
-    "lazy.nvim",
-    { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-    { path = "snacks.nvim", words = { "Snacks" } },
-  },
-})
+local M = {}
+
+function M.setup()
+  require("lazydev").setup({
+    library = {
+      "lazy.nvim",
+      { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      { path = "snacks.nvim", words = { "Snacks" } },
+    },
+  })
+end
+
+return M

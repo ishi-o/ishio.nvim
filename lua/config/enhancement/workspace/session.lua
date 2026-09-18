@@ -1,5 +1,11 @@
-local ok, auto_session = pcall(require, "auto-session")
-if ok then
+local M = {}
+
+function M.setup()
+  local ok, auto_session = pcall(require, "auto-session")
+  if not ok then
+    return
+  end
+
   auto_session.setup({
     pre_save_cmds = {
       function()
@@ -55,3 +61,5 @@ if ok then
     },
   })
 end
+
+return M

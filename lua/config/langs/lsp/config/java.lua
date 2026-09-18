@@ -1,4 +1,6 @@
 local conf = require("config.langs.lsp.conf")
+local M = {}
+
 local function resolve_java_home()
   if vim.env.JAVA_HOME and vim.env.JAVA_HOME ~= "" then
     return vim.env.JAVA_HOME, nil
@@ -29,44 +31,49 @@ local function glob_jars(pattern)
   return vim.split(vim.fn.glob(pattern), "\n", { trimempty = true })
 end
 
-local mason_share = vim.fn.stdpath("data") .. "/mason/share"
-local bundles = {}
-vim.list_extend(bundles, glob_jars(mason_share .. "/java-test/*.jar"))
-vim.lsp.config("jdtls", {
-  on_attach = function(client, bufnr)
-    conf.on_attach(client, bufnr)
-    local jdtls = require("jdtls")
-    vim.keymap.set("n", "<leader>co", function()
-      jdtls.organize_imports()
-    end, {
-      buffer = bufnr,
-      desc = "Organize Imports",
-    })
-  end,
-  capabilities = conf.capabilities,
-  settings = {
-    java = {
-      configuration = {
-        runtimes = resolve_java_runtimes(),
-      },
-      signatureHelp = {
-        enabled = true,
-      },
-      inlayHint = {
-        enabled = true,
-      },
-    },
-  },
-  init_options = {
-    bundles = bundles,
-    workspace = {
-      didChangeWatchedFiles = {
-        dynamicRegistration = true,
-      },
-      refresh = {
-        enabled = true,
+function M.setup()
+  local mason_share = vim.fn.stdpath("data") .. "/mason/share"
+  local bundles = {}
+  vim.list_extend(bundles, glob_jars(mason_share .. "/java-test/*.jar"))
+
+  vim.lsp.config("jdtls", {
+    on_attach = function(client, bufnr)
+      conf.on_attach(client, bufnr)
+      local jdtls = require("jdtls")
+      vim.keymap.set("n", "<leader>co", function()
+        jdtls.organize_imports()
+      end, {
+        buffer = bufnr,
+        desc = "Organize Imports",
+      })
+    end,
+    capabilities = conf.capabilities,
+    settings = {
+      java = {
+        configuration = {
+          runtimes = resolve_java_runtimes(),
+        },
+        signatureHelp = {
+          enabled = true,
+        },
+        inlayHint = {
+          enabled = true,
+        },
       },
     },
-    extendedClientCapabilities = require("jdtls").extendedClientCapabilities,
-  },
-})
+    init_options = {
+      bundles = bundles,
+      workspace = {
+        didChangeWatchedFiles = {
+          dynamicRegistration = true,
+        },
+        refresh = {
+          enabled = true,
+        },
+      },
+      extendedClientCapabilities = require("jdtls").extendedClientCapabilities,
+    },
+  })
+end
+
+return M

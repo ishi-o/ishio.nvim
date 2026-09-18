@@ -1,5 +1,11 @@
-local ok, mini_move = pcall(require, "mini.move")
-if ok then
+local M = {}
+
+function M.setup()
+  local ok, mini_move = pcall(require, "mini.move")
+  if not ok then
+    return
+  end
+
   mini_move.setup({
     mappings = {
       left = "<C-S-h>",
@@ -18,3 +24,5 @@ if ok then
     },
   })
 end
+
+return M

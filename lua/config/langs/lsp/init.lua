@@ -25,6 +25,7 @@ M.tools = {
   "nginx-language-server",
   "ruff",
   "rust-analyzer",
+  "sqls",
   "taplo",
   "texlab",
   "tinymist",
@@ -81,6 +82,7 @@ local custom_confs = {
   { module = "lua", servers = { "lua_ls" } },
   { module = "protobuf", servers = { "buf_ls" } },
   { module = "python", servers = { "ty" } },
+  { module = "sql", servers = { "sqls" } },
   { module = "typos", servers = { "typos_lsp" } },
   { module = "vue", servers = { "vtsls", "vue_ls" } },
   { module = "xml", servers = { "lemminx" } },
@@ -121,7 +123,7 @@ local function configure_servers()
   end
 
   for _, item in ipairs(custom_confs) do
-    require("config.langs.lsp.config." .. item.module)
+    require("config.langs.lsp.config." .. item.module).setup()
     for _, server in ipairs(item.servers) do
       vim.lsp.enable(server)
     end

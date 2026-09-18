@@ -4,7 +4,7 @@ return {
     lazy = true,
     module = "substitute",
     config = function()
-      require("config.enhancement.substitute.substitute")
+      require("config.enhancement.substitute.substitute").setup()
     end,
   },
   {
@@ -12,7 +12,7 @@ return {
     lazy = true,
     cmd = { "GrugFar", "GrugFarWithin" },
     config = function()
-      require("config.enhancement.substitute.grug-far")
+      require("config.enhancement.substitute.grug-far").setup()
     end,
   },
 }

@@ -8,7 +8,7 @@ return {
       "OverseerTaskAction",
     },
     config = function()
-      require("config.langs.launcher")
+      require("config.langs.launcher").setup()
     end,
   },
 }

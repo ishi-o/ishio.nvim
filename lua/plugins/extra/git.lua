@@ -2,7 +2,7 @@ return {
   {
     "lewis6991/gitsigns.nvim",
     config = function()
-      require("config.extra.git.gitsigns")
+      require("config.extra.git.gitsigns").setup()
     end,
   },
   {
@@ -14,12 +14,12 @@ return {
       {
         "sindrets/diffview.nvim",
         config = function()
-          require("config.extra.git.diffview")
+          require("config.extra.git.diffview").setup()
         end,
       },
     },
     config = function()
-      require("config.extra.git.neogit")
+      require("config.extra.git.neogit").setup()
     end,
   },
 }

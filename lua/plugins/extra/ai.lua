@@ -23,7 +23,7 @@ return {
       "nvim-lua/plenary.nvim",
     },
     config = function()
-      require("config.extra.ai.mcphub")
+      require("config.extra.ai.mcphub").setup()
     end,
   },
 }

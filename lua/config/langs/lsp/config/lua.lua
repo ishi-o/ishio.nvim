@@ -1,28 +1,34 @@
 local conf = require("config.langs.lsp.conf")
-vim.lsp.config("lua_ls", {
-  on_attach = conf.on_attach,
-  capabilities = conf.capabilities,
-  settings = {
-    Lua = {
-      runtime = {
-        version = "LuaJIT",
-      },
-      diagnostics = {
-        globals = {
-          "vim",
+local M = {}
+
+function M.setup()
+  vim.lsp.config("lua_ls", {
+    on_attach = conf.on_attach,
+    capabilities = conf.capabilities,
+    settings = {
+      Lua = {
+        runtime = {
+          version = "LuaJIT",
         },
-      },
-      workspace = {
-        library = {
-          vim.fn.expand("$VIMRUNTIME/lua"),
-          vim.fn.expand("$VIMRUNTIME/lua/vim/lsp"),
-          vim.fn.stdpath("config") .. "/lua",
+        diagnostics = {
+          globals = {
+            "vim",
+          },
         },
-        checkThirdParty = false,
-      },
-      telemetry = {
-        enable = false,
+        workspace = {
+          library = {
+            vim.fn.expand("$VIMRUNTIME/lua"),
+            vim.fn.expand("$VIMRUNTIME/lua/vim/lsp"),
+            vim.fn.stdpath("config") .. "/lua",
+          },
+          checkThirdParty = false,
+        },
+        telemetry = {
+          enable = false,
+        },
       },
     },
-  },
-})
+  })
+end
+
+return M

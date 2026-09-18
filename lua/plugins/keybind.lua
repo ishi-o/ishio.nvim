@@ -4,7 +4,7 @@ return {
     lazy = true,
     event = "VeryLazy",
     config = function()
-      require("config.keybind")
+      require("config.keybind").setup()
     end,
   },
 }

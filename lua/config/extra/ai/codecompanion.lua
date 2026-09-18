@@ -1,5 +1,11 @@
-local ok, codecompanion = pcall(require, "codecompanion")
-if ok then
+local M = {}
+
+function M.setup()
+  local ok, codecompanion = pcall(require, "codecompanion")
+  if not ok then
+    return
+  end
+
   codecompanion.setup({
     display = {
       chat = {
@@ -145,3 +151,5 @@ if ok then
     },
   })
 end
+
+return M

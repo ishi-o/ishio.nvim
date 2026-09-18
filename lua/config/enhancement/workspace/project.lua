@@ -1,5 +1,11 @@
-local ok, project_nvim = pcall(require, "project_nvim")
-if ok then
+local M = {}
+
+function M.setup()
+  local ok, project_nvim = pcall(require, "project_nvim")
+  if not ok then
+    return
+  end
+
   project_nvim.setup({
     detection_methods = { "pattern", "lsp" },
     patterns = {
@@ -12,3 +18,5 @@ if ok then
     },
   })
 end
+
+return M

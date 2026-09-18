@@ -8,9 +8,15 @@ return {
         "rafamadriz/friendly-snippets",
         enabled = false,
       },
+      {
+        "kristijanhusak/vim-dadbod-completion",
+        dependencies = {
+          "tpope/vim-dadbod",
+        },
+      },
     },
     config = function()
-      require("config.langs.complete.blink")
+      require("config.langs.complete.blink").setup()
     end,
   },
 }

@@ -3,7 +3,7 @@ return {
     "rmagatti/auto-session",
     lazy = false,
     config = function()
-      require("config.enhancement.workspace.session")
+      require("config.enhancement.workspace.session").setup()
     end,
   },
 }

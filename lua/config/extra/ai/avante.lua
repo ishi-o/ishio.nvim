@@ -1,3 +1,5 @@
+local M = {}
+
 local general_provider_config = {
   __inherited_from = "openai",
   timeout = 10000,
@@ -41,8 +43,12 @@ local xfyun_provider = {
   },
 }
 
-local ok, avante = pcall(require, "avante")
-if ok then
+function M.setup()
+  local ok, avante = pcall(require, "avante")
+  if not ok then
+    return
+  end
+
   avante.setup({
     -- mode = "legacy",
     mode = "agentic",
@@ -113,3 +119,5 @@ if ok then
     },
   })
 end
+
+return M

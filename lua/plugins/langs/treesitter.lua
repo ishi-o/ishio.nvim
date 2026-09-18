@@ -5,7 +5,7 @@ return {
     version = false,
     build = ":TSUpdate",
     config = function()
-      require("config.langs.treesitter")
+      require("config.langs.treesitter").setup()
     end,
   },
 }

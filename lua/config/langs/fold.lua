@@ -25,18 +25,28 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
   return newVirtText
 end
 
-require("ufo").setup({
-  close_fold_kinds_for_ft = {
-    default = { "imports", "comment" },
-  },
-  fold_virt_text_handler = handler,
-  provider_selector = function(_, ft, buftype)
-    if ft == "bigfile" then
-      return ""
-    end
-    if buftype ~= "" or not vim.tbl_contains(require("config.langs.treesitter_conf").fts, ft) or ft == "gitignore" then
-      return { "lsp", "indent" }
-    end
-    return { "lsp", "treesitter" }
-  end,
-})
+local M = {}
+
+function M.setup()
+  require("ufo").setup({
+    close_fold_kinds_for_ft = {
+      default = { "imports", "comment" },
+    },
+    fold_virt_text_handler = handler,
+    provider_selector = function(_, ft, buftype)
+      if ft == "bigfile" then
+        return ""
+      end
+      if
+        buftype ~= ""
+        or not vim.tbl_contains(require("config.langs.treesitter_conf").fts, ft)
+        or ft == "gitignore"
+      then
+        return { "lsp", "indent" }
+      end
+      return { "lsp", "treesitter" }
+    end,
+  })
+end
+
+return M

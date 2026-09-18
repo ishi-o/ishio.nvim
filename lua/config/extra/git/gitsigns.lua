@@ -1,5 +1,11 @@
-local ok, gitsigns = pcall(require, "gitsigns")
-if ok then
+local M = {}
+
+function M.setup()
+  local ok, gitsigns = pcall(require, "gitsigns")
+  if not ok then
+    return
+  end
+
   gitsigns.setup({
     on_attach = function(bufnr)
       if vim.bo[bufnr].filetype == "bigfile" then
@@ -16,3 +22,5 @@ if ok then
     },
   })
 end
+
+return M

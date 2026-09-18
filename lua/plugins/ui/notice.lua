@@ -7,7 +7,7 @@ return {
       "MunifTanjim/nui.nvim",
     },
     config = function()
-      require("config.ui.notice.noice")
+      require("config.ui.notice.noice").setup()
     end,
   },
 }
