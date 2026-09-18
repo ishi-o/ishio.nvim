@@ -9,7 +9,7 @@ return {
   { "<leader>b", group = "Buffer" },
   { "<leader>c", group = "Codes" },
   { "<leader>cm", group = "Code map" },
-  { "<leader>D", group = "Database" },
+  { "<leader>d", group = "Database" },
   { "<leader>e", group = "File picker" },
   { "<leader>f", group = "Telescope extension", mode = { "n", "x" } },
   { "<leader>g", group = "Git" },

@@ -6,6 +6,9 @@ return {
   {
     "tpope/vim-dadbod",
     cmd = { "DB" },
+    init = function()
+      require("config.extra.database").setup()
+    end,
   },
   {
     "kristijanhusak/vim-dadbod-ui",
@@ -18,11 +21,5 @@ return {
       "DBUIAddConnection",
       "DBUIFindBuffer",
     },
-    keys = {
-      { "<leader>Du", "<cmd>DBUIToggle<CR>", desc = "Database UI" },
-    },
-    init = function()
-      require("config.extra.database").setup()
-    end,
   },
 }
