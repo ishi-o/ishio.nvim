@@ -1,9 +1,5 @@
 return {
   {
-    "nanotee/sqls.nvim",
-    ft = { "sql", "mysql" },
-  },
-  {
     "tpope/vim-dadbod",
     cmd = { "DB" },
     init = function()

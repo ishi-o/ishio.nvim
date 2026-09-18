@@ -3,6 +3,7 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = {
       "mason-org/mason.nvim",
+      { "nanotee/sqls.nvim", lazy = false },
     },
     lazy = false,
     opts = {
