@@ -1,5 +1,6 @@
 require("config.lazy").setup()
-require("config.settings")
+require("config.utils").setup()
+require("config.settings").setup()
 require("lazy").setup({
   spec = {
     { import = "plugins/keybind" },
