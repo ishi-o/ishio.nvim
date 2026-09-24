@@ -52,4 +52,10 @@ return {
       require("config.langs.lsp.extra.helm").setup()
     end,
   },
+  {
+    "ishi-o/maa-pipeline.nvim",
+    config = function()
+      require("config.langs.lsp.extra.maa").setup()
+    end,
+  },
 }
