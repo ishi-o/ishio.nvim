@@ -1,17 +1,5 @@
 local M = {}
 
-local mybatis_path = vim.fs.normalize(vim.fn.expand("~/Code/tree-sitter-mybatis"))
-
-local function register_mybatis()
-  local parsers = require("nvim-treesitter.parsers")
-  parsers.mybatis = {
-    install_info = {
-      path = mybatis_path,
-      queries = "queries/mybatis",
-    },
-  }
-end
-
 local function start_treesitter(bufnr, language)
   if not vim.api.nvim_buf_is_valid(bufnr) or vim.bo[bufnr].filetype == "" then
     return
@@ -34,20 +22,6 @@ function M.setup()
   local autocmd = _G.UserUtils.autocmd
   local treesitter = require("nvim-treesitter")
   local pending = {}
-
-  vim.filetype.add({
-    extension = {
-      mybatis = "mybatis",
-    },
-  })
-
-  register_mybatis()
-  vim.api.nvim_create_autocmd("User", {
-    pattern = "TSUpdate",
-    callback = register_mybatis,
-    group = vim.api.nvim_create_augroup("config_treesitter_mybatis", { clear = true }),
-  })
-  vim.treesitter.language.register("mybatis", { "mybatis" })
 
   autocmd("FileType", {
     pattern = conf.fts,
