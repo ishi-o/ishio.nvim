@@ -2,6 +2,8 @@ local conf = require("config.langs.lsp.conf")
 local M = {}
 
 function M.setup()
+  local ok, schemastore = pcall(require, "schemastore")
+
   vim.lsp.config("ts_ls", {
     on_attach = conf.on_attach,
     capabilities = conf.capabilities,
@@ -10,12 +12,12 @@ function M.setup()
   vim.lsp.config("jsonls", {
     on_attach = conf.on_attach,
     capabilities = conf.capabilities,
-    settings = {
+    settings = ok and {
       json = {
-        schemas = require("schemastore").json.schemas(),
+        schemas = schemastore.json.schemas(),
         validate = { enable = true },
       },
-    },
+    } or nil,
   })
 end
 

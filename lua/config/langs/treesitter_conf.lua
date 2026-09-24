@@ -32,6 +32,7 @@ M.fts = {
   "luadoc",
   "markdown",
   "markdown_inline",
+  "mybatis",
   "nginx",
   "ninja",
   "printf",
