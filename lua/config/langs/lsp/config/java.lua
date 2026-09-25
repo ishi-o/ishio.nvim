@@ -5,6 +5,15 @@ local function resolve_java_home()
   if vim.env.JAVA_HOME and vim.env.JAVA_HOME ~= "" then
     return vim.env.JAVA_HOME, nil
   end
+  if vim.fn.has("win32") == 1 then
+    local java_path = vim.fn.exepath("java")
+    if java_path ~= "" then
+      local java_home = vim.fs.dirname(vim.fs.dirname(java_path))
+      if vim.fn.isdirectory(java_home) == 1 then
+        return java_home, nil
+      end
+    end
+  end
   if vim.fn.executable("/usr/libexec/java_home") == 1 then
     local home = vim.trim(vim.fn.system({ "/usr/libexec/java_home" }))
     if vim.v.shell_error == 0 and home ~= "" then

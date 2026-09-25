@@ -80,14 +80,13 @@ function M.setup()
         ask("Receiver type (e.g., *MyStruct): ", "*", function()
           ask("Parameter name: ", "", function()
             ask("Interface name (e.g., io.Reader): ", "", function()
-              local cmd = string.format("impl '%s %s' %s", inputs[2], inputs[1], inputs[3])
-              local handle = io.popen(cmd)
-              if handle then
-                local result = handle:read("*a")
-                handle:close()
-                if result and result ~= "" then
-                  vim.api.nvim_put(vim.split(result, "\n"), "l", false, true)
-                end
+              local result = vim.fn.systemlist({
+                "impl",
+                inputs[2] .. " " .. inputs[1],
+                inputs[3],
+              })
+              if vim.v.shell_error == 0 and #result > 0 then
+                vim.api.nvim_put(result, "l", false, true)
               end
             end)
           end)
