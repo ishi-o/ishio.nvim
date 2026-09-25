@@ -69,10 +69,6 @@ local mappings = {
   map("<leader><tab>d", "workbench.action.closeActiveEditor", "Delete tab"),
   command_palette_map("<leader><tab>r", "Rename"),
 
-  -- General: terminal
-  native("<C-q>", "<C-\\><C-n>", "Quit terminal mode", "t"),
-  map("<C-t>", "workbench.action.terminal.toggleTerminal", "Toggle: terminal"),
-
   -- General: UI
   command_palette_map("<leader>ur", "Redraw, Noh, Diff update"),
   map("<leader>ud", "workbench.action.problems.focus", "Toggle diagnostic (virtual lines)"),
