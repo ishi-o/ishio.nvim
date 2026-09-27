@@ -2,6 +2,7 @@ local M = {}
 
 local conf = require("config.langs.lsp.conf")
 local registry = require("mason-registry")
+local powershell = require("config.langs.lsp.config.powershell")
 
 M.tools = {
   -- LSP Servers
@@ -134,6 +135,7 @@ local custom_confs = {
     servers = {
       { name = "powershell_es", package = "powershell-editor-services", filetypes = { "ps1" } },
     },
+    enabled = powershell.is_available,
   },
   {
     module = "python",
@@ -353,15 +355,17 @@ local function get_lsp_for_filetype(filetype)
   end
 
   for _, item in ipairs(custom_confs) do
-    local matched = false
-    for _, server in ipairs(item.servers) do
-      if matches_filetype(server.filetypes, filetype) then
-        matched = true
-        table.insert(servers, vim.tbl_extend("force", server, { module = item.module }))
+    if item.enabled == nil or item.enabled() then
+      local matched = false
+      for _, server in ipairs(item.servers) do
+        if matches_filetype(server.filetypes, filetype) then
+          matched = true
+          table.insert(servers, vim.tbl_extend("force", server, { module = item.module }))
+        end
       end
-    end
-    if matched then
-      table.insert(modules, item)
+      if matched then
+        table.insert(modules, item)
+      end
     end
   end
 
@@ -374,9 +378,9 @@ local function setup_custom_module(item)
     return false, module
   end
 
-  local setup_ok, setup_error = pcall(module.setup)
-  if not setup_ok then
-    return false, setup_error
+  local setup_ok, setup_result = pcall(module.setup)
+  if not setup_ok or setup_result == false then
+    return false, setup_result or "setup returned false"
   end
   return true
 end

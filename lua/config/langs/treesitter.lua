@@ -19,12 +19,17 @@ end
 
 function M.setup()
   local conf = require("config.langs.treesitter_conf")
+  local powershell = require("config.langs.lsp.config.powershell")
   local autocmd = _G.UserUtils.autocmd
   local treesitter = require("nvim-treesitter")
   local pending = {}
 
+  local filetypes = vim.tbl_filter(function(filetype)
+    return filetype ~= "powershell" or powershell.is_available()
+  end, conf.fts)
+
   autocmd("FileType", {
-    pattern = conf.fts,
+    pattern = filetypes,
     callback = function(args)
       local bufnr = args.buf
       local filetype = vim.bo[bufnr].filetype
