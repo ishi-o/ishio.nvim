@@ -23,6 +23,7 @@ M.tools = {
   "lua-language-server",
   "marksman",
   "nginx-language-server",
+  "powershell-editor-services",
   "ruff",
   "rust-analyzer",
   "sqls",
@@ -126,6 +127,12 @@ local custom_confs = {
     module = "protobuf",
     servers = {
       { name = "buf_ls", package = "buf", filetypes = { "proto", "buf-config" } },
+    },
+  },
+  {
+    module = "powershell",
+    servers = {
+      { name = "powershell_es", package = "powershell-editor-services", filetypes = { "ps1" } },
     },
   },
   {

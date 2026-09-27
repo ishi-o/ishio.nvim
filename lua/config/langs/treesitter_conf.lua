@@ -35,6 +35,7 @@ M.fts = {
   "nginx",
   "ninja",
   "printf",
+  "powershell",
   "python",
   "query",
   "regex",
