@@ -1,9 +1,34 @@
-local function move_or_kitty(dir)
-  local dir_map = { h = "left", j = "bottom", k = "top", l = "right" }
+local function move_or_terminal(dir)
+  local kitty_dir_map = { h = "left", j = "bottom", k = "top", l = "right" }
+  local wt_dir_map = { h = "left", j = "down", k = "up", l = "right" }
   local current = vim.fn.winnr()
   vim.cmd("wincmd " .. dir)
   if vim.fn.winnr() == current then
-    vim.fn.system("kitty @ focus-window --match neighbor:" .. dir_map[dir])
+    if vim.env.KITTY_WINDOW_ID then
+      vim.fn.system("kitty @ focus-window --match neighbor:" .. kitty_dir_map[dir])
+    elseif vim.env.WT_SESSION then
+      vim.fn.system({ "wt.exe", "-w", "0", "move-focus", "-d", wt_dir_map[dir] })
+    end
+  end
+end
+
+local function resize_or_terminal(dir)
+  local dir_map = { h = "left", j = "down", k = "up", l = "right" }
+  local current = vim.fn.winnr()
+  vim.cmd("wincmd " .. dir)
+  local at_edge = vim.fn.winnr() == current
+  if not at_edge then
+    vim.cmd("wincmd p")
+  end
+  if at_edge and vim.env.WT_SESSION then
+    vim.fn.system({
+      "cscript.exe",
+      "//nologo",
+      vim.fn.expand("~/.local/bin/wt-resize.vbs"),
+      dir,
+    })
+  else
+    require("smart-splits")["resize_" .. dir_map[dir]]()
   end
 end
 
@@ -57,7 +82,7 @@ return {
     {
       "<C-h>",
       function()
-        move_or_kitty("h")
+        move_or_terminal("h")
       end,
       desc = "Focus on the left page",
       hidden = true,
@@ -65,7 +90,7 @@ return {
     {
       "<C-j>",
       function()
-        move_or_kitty("j")
+        move_or_terminal("j")
       end,
       desc = "Focus on the page below",
       hidden = true,
@@ -73,7 +98,7 @@ return {
     {
       "<C-k>",
       function()
-        move_or_kitty("k")
+        move_or_terminal("k")
       end,
       desc = "Focus on the page above",
       hidden = true,
@@ -81,40 +106,62 @@ return {
     {
       "<C-l>",
       function()
-        move_or_kitty("l")
+        move_or_terminal("l")
       end,
       desc = "Focus on the right page",
       hidden = true,
     },
     {
-      { "<A-h>", '<cmd>lua require("smart-splits").resize_left()<CR>', desc = "Window resize left" },
-      { "<A-j>", '<cmd>lua require("smart-splits").resize_down()<CR>', desc = "Window resize down" },
-      { "<A-k>", '<cmd>lua require("smart-splits").resize_up()<CR>', desc = "Window resize up" },
-      { "<A-l>", '<cmd>lua require("smart-splits").resize_right()<CR>', desc = "Window resize right" },
-      {
-        "<leader>H",
-        '<cmd>lua require("smart-splits").swap_buf_left()<CR>',
-        desc = "Window swap left",
-        hidden = true,
-      },
-      {
-        "<leader>J",
-        '<cmd>lua require("smart-splits").swap_buf_down()<CR>',
-        desc = "Window swap down",
-        hidden = true,
-      },
-      {
-        "<leader>K",
-        '<cmd>lua require("smart-splits").swap_buf_up()<CR>',
-        desc = "Window swap up",
-        hidden = true,
-      },
-      {
-        "<leader>L",
-        '<cmd>lua require("smart-splits").swap_buf_right()<CR>',
-        desc = "Window swap right",
-        hidden = true,
-      },
+      "<A-h>",
+      function()
+        resize_or_terminal("h")
+      end,
+      desc = "Window resize left",
+    },
+    {
+      "<A-j>",
+      function()
+        resize_or_terminal("j")
+      end,
+      desc = "Window resize down",
+    },
+    {
+      "<A-k>",
+      function()
+        resize_or_terminal("k")
+      end,
+      desc = "Window resize up",
+    },
+    {
+      "<A-l>",
+      function()
+        resize_or_terminal("l")
+      end,
+      desc = "Window resize right",
+    },
+    {
+      "<leader>H",
+      '<cmd>lua require("smart-splits").swap_buf_left()<CR>',
+      desc = "Window swap left",
+      hidden = true,
+    },
+    {
+      "<leader>J",
+      '<cmd>lua require("smart-splits").swap_buf_down()<CR>',
+      desc = "Window swap down",
+      hidden = true,
+    },
+    {
+      "<leader>K",
+      '<cmd>lua require("smart-splits").swap_buf_up()<CR>',
+      desc = "Window swap up",
+      hidden = true,
+    },
+    {
+      "<leader>L",
+      '<cmd>lua require("smart-splits").swap_buf_right()<CR>',
+      desc = "Window swap right",
+      hidden = true,
     },
   },
 }
