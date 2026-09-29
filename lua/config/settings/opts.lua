@@ -34,7 +34,7 @@ function M.setup()
 
   vim.opt.showtabline = 2
   vim.opt.timeoutlen = 400
-  vim.opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+  vim.opt.sessionoptions = "globals,blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
   vim.opt.foldcolumn = "1"
   vim.opt.foldlevel = 99

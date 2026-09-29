@@ -6,6 +6,7 @@ function M.setup()
     dashboard = { enabled = false },
     dim = { enabled = false },
     explorer = { enabled = false },
+    image = { enabled = true },
     indent = { enabled = true },
     input = { enabled = false },
     notifier = { enabled = false },

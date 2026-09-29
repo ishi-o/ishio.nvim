@@ -9,6 +9,29 @@ function M.setup()
   auto_session.setup({
     pre_save_cmds = {
       function()
+        local data = {}
+
+        for _, tab in ipairs(vim.api.nvim_list_tabpages()) do
+          local paths = {}
+          local ok, buffers = pcall(vim.api.nvim_tabpage_get_var, tab, "bufferline_buffers")
+
+          if ok and type(buffers) == "table" then
+            for key, enabled in pairs(buffers) do
+              local bufnr = tonumber(key)
+
+              if enabled and bufnr and vim.api.nvim_buf_is_valid(bufnr) and vim.bo[bufnr].buflisted then
+                paths[#paths + 1] = vim.api.nvim_buf_get_name(bufnr)
+              end
+            end
+          end
+
+          table.sort(paths)
+          data[#data + 1] = paths
+        end
+
+        vim.g.bufferline_tab_buffers = vim.json.encode(data)
+      end,
+      function()
         -- Close overseer tasks
         local ok2, overseer_task_list = pcall(require, "overseer.task_list")
         if ok2 then
@@ -52,6 +75,60 @@ function M.setup()
         end
       end,
     },
+    post_restore_cmds = {
+      function()
+        local raw = vim.g.bufferline_tab_buffers
+        if type(raw) ~= "string" or raw == "" then
+          return
+        end
+
+        local ok, data = pcall(vim.json.decode, raw)
+        if not ok or type(data) ~= "table" then
+          return
+        end
+
+        local tabs = vim.api.nvim_list_tabpages()
+
+        for index, paths in ipairs(data) do
+          local tab = tabs[index]
+          if tab then
+            local buffers = {}
+
+            for _, path in ipairs(paths) do
+              local bufnr
+
+              for _, candidate in ipairs(vim.api.nvim_list_bufs()) do
+                if vim.api.nvim_buf_is_valid(candidate) and vim.api.nvim_buf_get_name(candidate) == path then
+                  bufnr = candidate
+                  break
+                end
+              end
+
+              if not bufnr and path ~= "" then
+                bufnr = vim.fn.bufadd(path)
+              end
+
+              if bufnr then
+                vim.bo[bufnr].buflisted = true
+                buffers[tostring(bufnr)] = true
+              end
+            end
+
+            vim.api.nvim_tabpage_set_var(tab, "bufferline_buffers", buffers)
+          end
+        end
+
+        vim.cmd.redrawtabline()
+      end,
+    },
+    save_extra_data = function()
+      return vim.g.bufferline_tab_buffers
+    end,
+    restore_extra_data = function(_, raw)
+      if type(raw) == "string" then
+        vim.g.bufferline_tab_buffers = raw
+      end
+    end,
     suppress_dirs = {
       "~/",
       "~/opt",

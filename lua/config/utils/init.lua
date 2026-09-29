@@ -18,34 +18,42 @@ function M.setup()
   end
 
   function _G.UserUtils.track_tab_buffers()
-    local buffers = vim.t.bufferline_buffers or {}
+    local tab = vim.api.nvim_get_current_tabpage()
+    local ok, buffers = pcall(vim.api.nvim_tabpage_get_var, tab, "bufferline_buffers")
+    buffers = ok and type(buffers) == "table" and buffers or {}
 
-    for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
-      buffers[tostring(vim.api.nvim_win_get_buf(win))] = true
+    local buf = vim.api.nvim_get_current_buf()
+    if vim.bo[buf].buflisted then
+      buffers[tostring(buf)] = true
+      vim.api.nvim_tabpage_set_var(tab, "bufferline_buffers", buffers)
     end
-
-    vim.t.bufferline_buffers = buffers
   end
 
   function _G.UserUtils.get_tab_buffers(tab)
     tab = tab or vim.api.nvim_get_current_tabpage()
-    local buffers = {}
-    local ok, cached = pcall(vim.api.nvim_tabpage_get_var, tab, "bufferline_buffers")
+    local ok, buffers = pcall(vim.api.nvim_tabpage_get_var, tab, "bufferline_buffers")
+    local result = {}
 
-    if ok then
-      for buf, included in pairs(cached) do
-        local id = tonumber(buf)
-        if included and id then
-          buffers[id] = true
+    if ok and type(buffers) == "table" then
+      for key, enabled in pairs(buffers) do
+        local bufnr = tonumber(key)
+        if enabled and bufnr and vim.api.nvim_buf_is_valid(bufnr) and vim.bo[bufnr].buflisted then
+          result[bufnr] = true
         end
       end
     end
 
-    for _, win in ipairs(vim.api.nvim_tabpage_list_wins(tab)) do
-      buffers[vim.api.nvim_win_get_buf(win)] = true
-    end
+    return result
+  end
 
-    return buffers
+  function _G.UserUtils.remove_tab_buffer(buf, tab)
+    tab = tab or vim.api.nvim_get_current_tabpage()
+    local ok, buffers = pcall(vim.api.nvim_tabpage_get_var, tab, "bufferline_buffers")
+
+    if ok and type(buffers) == "table" and buffers[tostring(buf)] then
+      buffers[tostring(buf)] = nil
+      vim.api.nvim_tabpage_set_var(tab, "bufferline_buffers", buffers)
+    end
   end
 end
 

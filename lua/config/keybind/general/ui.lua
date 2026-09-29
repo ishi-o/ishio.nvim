@@ -107,6 +107,7 @@ return {
       function()
         local bufferline_config = require("bufferline.config")
         local mode = bufferline_config.options.mode == "tabs" and "buffers" or "tabs"
+        bufferline_config.user.options = vim.tbl_deep_extend("force", bufferline_config.user.options, { mode = mode })
         bufferline_config.options.mode = mode
         bufferline_config.apply(true)
         vim.cmd.redrawtabline()
