@@ -1,3 +1,31 @@
+local wt_exe = (vim.env.SCOOP or vim.fn.expand("~/scoop")) ..
+  "/apps/windows-terminal/current/wt.exe"
+
+local ffi = require("ffi")
+
+ffi.cdef[[
+void keybd_event(
+  unsigned char bVk,
+  unsigned char bScan,
+  unsigned long dwFlags,
+  unsigned long long dwExtraInfo
+);
+]]
+
+local function send_shifted_key(virtual_key)
+  ffi.C.keybd_event(0x10, 0, 0, 0)
+  ffi.C.keybd_event(virtual_key, 0, 0, 0)
+  ffi.C.keybd_event(virtual_key, 0, 2, 0)
+  ffi.C.keybd_event(0x10, 0, 2, 0)
+end
+
+local function invoke_wt(args)
+  if vim.fn.filereadable(wt_exe) == 0 then
+    wt_exe = "wt.exe"
+  end
+  vim.fn.system(vim.list_extend({ wt_exe, "-w", "0" }, args))
+end
+
 local function move_or_terminal(dir)
   local kitty_dir_map = { h = "left", j = "bottom", k = "top", l = "right" }
   local wt_dir_map = { h = "left", j = "down", k = "up", l = "right" }
@@ -7,7 +35,7 @@ local function move_or_terminal(dir)
     if vim.env.KITTY_WINDOW_ID then
       vim.fn.system("kitty @ focus-window --match neighbor:" .. kitty_dir_map[dir])
     elseif vim.env.WT_SESSION then
-      vim.fn.system({ "wt.exe", "-w", "0", "move-focus", "-d", wt_dir_map[dir] })
+      invoke_wt({ "move-focus", wt_dir_map[dir] })
     end
   end
 end
@@ -21,12 +49,7 @@ local function resize_or_terminal(dir)
     vim.cmd("wincmd p")
   end
   if at_edge and vim.env.WT_SESSION then
-    vim.fn.system({
-      "cscript.exe",
-      "//nologo",
-      vim.fn.expand("~/.local/bin/wt-resize.vbs"),
-      dir,
-    })
+    send_shifted_key(({ h = 37, j = 40, k = 38, l = 39 })[dir])
   else
     require("smart-splits")["resize_" .. dir_map[dir]]()
   end

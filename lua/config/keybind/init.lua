@@ -22,7 +22,7 @@ function M.setup()
         return not vim.g.vscode
       end,
       {
-        "<C-_>",
+        "<C-/>",
         function()
           wk.show({ global = false })
         end,
