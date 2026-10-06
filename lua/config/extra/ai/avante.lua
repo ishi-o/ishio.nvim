@@ -93,18 +93,9 @@ function M.setup()
       "bash",
     },
     system_prompt = function()
-      local ok2, mcphub = pcall(require, "mcphub")
-      if ok2 then
-        local hub = mcphub.get_hub_instance()
-        return hub and hub:get_active_servers_prompt() or ""
-      end
       return ""
     end,
     custom_tools = function()
-      local ok3, mcphub_ext = pcall(require, "mcphub.extensions.avante")
-      if ok3 then
-        return { mcphub_ext.mcp_tool() }
-      end
       return {}
     end,
     input = {

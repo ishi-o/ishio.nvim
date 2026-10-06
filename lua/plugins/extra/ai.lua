@@ -9,13 +9,4 @@ return {
       require("config.extra.ai.codex").setup()
     end,
   },
-  {
-    "ravitemer/mcphub.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-    config = function()
-      require("config.extra.ai.mcphub").setup()
-    end,
-  },
 }
