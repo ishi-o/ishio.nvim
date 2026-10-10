@@ -1,5 +1,5 @@
 return {
-  require("config.keybind.langs.codes"),
+  require("config.keybind.langs.code-action"),
   require("config.keybind.langs.complete"),
   require("config.keybind.langs.diagnostic"),
   require("config.keybind.langs.fold"),

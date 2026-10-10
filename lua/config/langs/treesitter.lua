@@ -1,5 +1,60 @@
 local M = {}
 
+M.fts = {
+  "bash",
+  "c",
+  "cpp",
+  "css",
+  "diff",
+  "dockerfile",
+  "doxygen",
+  "gitattributes",
+  "gitcommit",
+  "gitignore",
+  "git_config",
+  "git_rebase",
+  "go",
+  "gomod",
+  "gosum",
+  "gowork",
+  "graphql",
+  "groovy",
+  "helm",
+  "html",
+  "http",
+  "java",
+  "javadoc",
+  "javascript",
+  "jsdoc",
+  "json5",
+  "latex",
+  "lua",
+  "luadoc",
+  "markdown",
+  "markdown_inline",
+  "nginx",
+  "ninja",
+  "printf",
+  "powershell",
+  "python",
+  "query",
+  "regex",
+  "rust",
+  "rst",
+  "scala",
+  "scss",
+  "sql",
+  "toml",
+  "tsx",
+  "typst",
+  "typescript",
+  "vim",
+  "vimdoc",
+  "vue",
+  "xml",
+  "yaml", -- GitHub Actions workflows use the YAML parser.
+}
+
 local function start_treesitter(bufnr, language)
   if not vim.api.nvim_buf_is_valid(bufnr) or vim.bo[bufnr].filetype == "" then
     return
@@ -18,15 +73,14 @@ local function start_treesitter(bufnr, language)
 end
 
 function M.setup()
-  local conf = require("config.langs.treesitter_conf")
-  local powershell = require("config.langs.lsp.config.powershell")
+  local powershell = require("config.langs.lsp.servers.powershell")
   local autocmd = _G.UserUtils.autocmd
   local treesitter = require("nvim-treesitter")
   local pending = {}
 
   local filetypes = vim.tbl_filter(function(filetype)
     return filetype ~= "powershell" or powershell.is_available()
-  end, conf.fts)
+  end, M.fts)
 
   autocmd("FileType", {
     pattern = filetypes,

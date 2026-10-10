@@ -16,7 +16,7 @@ return {
       },
     },
     config = function()
-      require("config.langs.complete.blink").setup()
+      require("config.langs.complete").setup()
     end,
   },
 }

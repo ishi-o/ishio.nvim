@@ -36,12 +36,11 @@ function M.save()
     table.sort(paths)
     data[#data + 1] = paths
   end
-  vim.g.bufferline_tab_buffers = vim.json.encode(data)
+  vim.g.BufferlineTabBuffers = vim.json.encode(data)
 
   for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
     local buftype = vim.bo[bufnr].buftype
-    local filetype = vim.bo[bufnr].filetype
-    if buftype == "terminal" or filetype == "kitty-scrollback" then
+    if buftype == "terminal" then
       vim.api.nvim_buf_delete(bufnr, { force = true })
     end
   end
@@ -59,7 +58,7 @@ function M.restore()
   end
   vim.cmd("silent! source " .. vim.fn.fnameescape(file))
 
-  local raw = vim.g.bufferline_tab_buffers
+  local raw = vim.g.BufferlineTabBuffers
   if type(raw) ~= "string" or raw == "" then
     return
   end

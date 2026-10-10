@@ -7,7 +7,7 @@ return {
     cmd = "Codex",
     enabled = false,
     config = function()
-      require("config.extra.ai.codex").setup()
+      require("config.extra.codex").setup()
     end,
   },
 }

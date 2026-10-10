@@ -7,7 +7,7 @@ return {
       "nvim-treesitter/nvim-treesitter",
     },
     config = function()
-      require("config.preview.markdown.inner-preview").setup()
+      require("config.markdown.render").setup()
     end,
   },
   {
@@ -22,7 +22,7 @@ return {
       "gitcommit",
     },
     config = function()
-      require("config.preview.markdown.autolist").setup()
+      require("config.markdown.autolist").setup()
     end,
   },
 }

@@ -1,6 +1,6 @@
 local M = {}
 
-local conf = require("config.langs.lsp.conf")
+local conf = require("config.langs.lsp.shared")
 
 function M.setup()
   require("maa-pipeline.nvim").setup({

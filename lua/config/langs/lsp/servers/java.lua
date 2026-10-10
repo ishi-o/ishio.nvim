@@ -1,4 +1,4 @@
-local conf = require("config.langs.lsp.conf")
+local conf = require("config.langs.lsp.shared")
 local M = {}
 
 local function resolve_java_home()

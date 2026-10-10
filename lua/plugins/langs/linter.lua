@@ -4,7 +4,7 @@ return {
     lazy = true,
     event = "BufReadPost",
     config = function()
-      require("config.langs.linter.nvim-lint").setup()
+      require("config.langs.linter").setup()
     end,
   },
 }

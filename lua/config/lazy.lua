@@ -22,7 +22,6 @@ function M.load_plugins()
     spec = {
       { import = "plugins" },
       { import = "plugins/langs" },
-      { import = "plugins/preview" },
       { import = "plugins/enhancement" },
       { import = "plugins/ui" },
       { import = "plugins/extra" },

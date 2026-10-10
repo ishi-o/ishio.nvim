@@ -1,8 +1,8 @@
 local M = {}
 
-local conf = require("config.langs.lsp.conf")
+local conf = require("config.langs.lsp.shared")
 local registry = require("mason-registry")
-local powershell = require("config.langs.lsp.config.powershell")
+local powershell = require("config.langs.lsp.servers.powershell")
 
 M.tools = {
   -- LSP Servers
@@ -373,7 +373,7 @@ local function get_lsp_for_filetype(filetype)
 end
 
 local function setup_custom_module(item)
-  local ok, module = pcall(require, "config.langs.lsp.config." .. item.module)
+  local ok, module = pcall(require, "config.langs.lsp.servers." .. item.module)
   if not ok then
     return false, module
   end

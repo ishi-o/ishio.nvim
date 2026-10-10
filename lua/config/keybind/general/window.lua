@@ -40,19 +40,50 @@ local function move_or_terminal(dir)
   end
 end
 
+local function is_full_height()
+  local height = vim.o.lines - vim.o.cmdheight
+  if (vim.o.laststatus == 1 and #vim.api.nvim_tabpage_list_wins(0) > 1) or vim.o.laststatus > 1 then
+    height = height - 1
+  end
+  if (vim.o.showtabline == 1 and #vim.api.nvim_list_tabpages() > 1) or vim.o.showtabline == 2 then
+    height = height - 1
+  end
+  return vim.api.nvim_win_get_height(0) == height
+end
+
 local function resize_or_terminal(dir)
-  local dir_map = { h = "left", j = "down", k = "up", l = "right" }
-  local current = vim.fn.winnr()
+  local amount = 2
+  local horizontal = dir == "h" or dir == "l"
+  local fills_axis = horizontal and vim.api.nvim_win_get_width(0) == vim.o.columns or is_full_height()
+  if fills_axis then
+    if vim.env.WT_SESSION then
+      send_shifted_key(({ h = 37, j = 40, k = 38, l = 39 })[dir])
+    elseif vim.env.KITTY_WINDOW_ID then
+      vim.fn.system({
+        "kitty",
+        "@",
+        "resize-window",
+        "--axis", horizontal and "horizontal" or "vertical",
+        "--increment", (dir == "l" or dir == "j") and amount or -amount,
+      })
+    end
+    return
+  end
+  local grow = vim.fn.winnr() ~= vim.fn.winnr(dir)
+  local cmd = horizontal and "vertical resize " or "resize "
+  vim.cmd(cmd .. (grow and "+" or "-") .. amount)
+end
+
+local function swap_buf(dir)
+  local curwin = vim.api.nvim_get_current_win()
+  local curbuf = vim.api.nvim_get_current_buf()
   vim.cmd("wincmd " .. dir)
-  local at_edge = vim.fn.winnr() == current
-  if not at_edge then
-    vim.cmd("wincmd p")
+  if vim.api.nvim_get_current_win() == curwin then
+    return
   end
-  if at_edge and vim.env.WT_SESSION then
-    send_shifted_key(({ h = 37, j = 40, k = 38, l = 39 })[dir])
-  else
-    require("smart-splits")["resize_" .. dir_map[dir]]()
-  end
+  local otherbuf = vim.api.nvim_get_current_buf()
+  vim.api.nvim_win_set_buf(0, curbuf)
+  vim.api.nvim_win_set_buf(curwin, otherbuf)
 end
 
 local function smart_close()
@@ -164,25 +195,33 @@ return {
     },
     {
       "<leader>H",
-      '<cmd>lua require("smart-splits").swap_buf_left()<CR>',
+      function()
+        swap_buf("h")
+      end,
       desc = "Window swap left",
       hidden = true,
     },
     {
       "<leader>J",
-      '<cmd>lua require("smart-splits").swap_buf_down()<CR>',
+      function()
+        swap_buf("j")
+      end,
       desc = "Window swap down",
       hidden = true,
     },
     {
       "<leader>K",
-      '<cmd>lua require("smart-splits").swap_buf_up()<CR>',
+      function()
+        swap_buf("k")
+      end,
       desc = "Window swap up",
       hidden = true,
     },
     {
       "<leader>L",
-      '<cmd>lua require("smart-splits").swap_buf_right()<CR>',
+      function()
+        swap_buf("l")
+      end,
       desc = "Window swap right",
       hidden = true,
     },

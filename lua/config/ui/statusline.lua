@@ -188,7 +188,7 @@ function M.setup()
   end)
 
   api.nvim_set_option_value("laststatus", 3, { scope = "global" })
-  api.nvim_set_option_value("statusline", "%!v:lua.require('config.ui.statusbar').render()", { scope = "global" })
+  api.nvim_set_option_value("statusline", "%!v:lua.require('config.ui.statusline').render()", { scope = "global" })
 
   autocmd({
     "BufEnter",

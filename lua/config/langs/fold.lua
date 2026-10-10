@@ -39,7 +39,7 @@ function M.setup()
       end
       if
         buftype ~= ""
-        or not vim.tbl_contains(require("config.langs.treesitter_conf").fts, ft)
+        or not vim.tbl_contains(require("config.langs.treesitter").fts, ft)
         or ft == "gitignore"
       then
         return { "lsp", "indent" }
