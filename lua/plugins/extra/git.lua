@@ -22,4 +22,22 @@ return {
       require("config.extra.git.neogit").setup()
     end,
   },
+  {
+    "nvim-mini/mini.diff",
+    config = function()
+      require("config.extra.git.mini_diff").setup()
+    end,
+  },
+  {
+    "pwntester/octo.nvim",
+    lazy = true,
+    cmd = "Octo",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "ibhagwan/fzf-lua",
+    },
+    config = function()
+      require("config.extra.git.octo").setup()
+    end,
+  },
 }

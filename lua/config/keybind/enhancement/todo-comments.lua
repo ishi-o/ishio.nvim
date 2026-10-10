@@ -16,18 +16,14 @@ return {
     {
       "<leader>ft",
       function()
-        require("lazy").load({ plugins = { "todo-comments.nvim" } })
-        Snacks.picker.todo_comments()
+        require("todo-comments.fzf").todo()
       end,
       desc = "Todo",
     },
     {
       "<leader>fT",
       function()
-        require("lazy").load({ plugins = { "todo-comments.nvim" } })
-        Snacks.picker.todo_comments({
-          keywords = { "TODO", "FIX", "FIXME" },
-        })
+        require("todo-comments.fzf").todo({ keywords = "TODO", "FIX", "FIXME" })
       end,
       desc = "Todo/Fix/Fixme",
     },

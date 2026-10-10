@@ -6,7 +6,6 @@ function M.setup()
   require("config.settings.opts").setup()
   require("config.langs.diagnostic").setup()
   require("config.ui.statusbar").setup()
-  require("config.settings.usercmds.init").setup()
 end
 
 return M

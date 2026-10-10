@@ -2,8 +2,8 @@ return {
   {
     mode = "i",
     { "<Tab>", desc = "Confirm complete" },
-    { "<A-k>", desc = "Prev complete item" },
-    { "<A-j>", desc = "Next complete item" },
+    { "<C-k>", desc = "Prev complete item" },
+    { "<C-j>", desc = "Next complete item" },
   },
   {
     mode = "c",

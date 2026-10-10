@@ -53,7 +53,15 @@ return {
     end,
   },
   {
-    "ishi-o/maa-pipeline.nvim",
+    "ishianecho/nvim-mybatis",
+    enabled = false,
+    config = function()
+      require("nvim-mybatis").setup({})
+    end,
+  },
+  {
+    "ishianecho/maa-pipeline.nvim",
+    build = "npm install --include=dev && npm run build",
     config = function()
       require("config.langs.lsp.extra.maa").setup()
     end,

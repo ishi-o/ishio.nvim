@@ -94,7 +94,7 @@ return {
   {
     "<leader>uC",
     function()
-      Snacks.picker.colorschemes()
+      require("fzf-lua").colorschemes()
     end,
     desc = "Colorschemes",
   },

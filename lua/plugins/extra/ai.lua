@@ -1,8 +1,8 @@
 return {
   {
-    "ishi-o/mini.codex",
+    "ishianecho/mini.codex",
     dependencies = {
-      "ishi-o/codex-prompt-lsp",
+      "ishianecho/codex-prompt-lsp",
     },
     cmd = "Codex",
     enabled = false,

@@ -1,54 +1,47 @@
 return {
   {
     cond = function()
-      return _G.UserUtils.plugin_installed("snacks.nvim")
+      return _G.UserUtils.plugin_installed("fzf-lua")
     end,
     {
       "<leader>gb",
       function()
-        Snacks.picker.git_branches()
+        require("fzf-lua").git_branches()
       end,
       desc = "Git Branches",
     },
     {
       "<leader>gl",
       function()
-        Snacks.picker.git_log()
+        require("fzf-lua").git_commits()
       end,
       desc = "Git Log",
     },
     {
-      "<leader>gL",
-      function()
-        Snacks.picker.git_log_line()
-      end,
-      desc = "Git Log Line",
-    },
-    {
       "<leader>gs",
       function()
-        Snacks.picker.git_status()
+        require("fzf-lua").git_status()
       end,
       desc = "Git Status",
     },
     {
       "<leader>gS",
       function()
-        Snacks.picker.git_stash()
+        require("fzf-lua").git_stash()
       end,
       desc = "Git Stash",
     },
     {
       "<leader>gd",
       function()
-        Snacks.picker.git_diff()
+        require("fzf-lua").git_diff()
       end,
-      desc = "Git Diff (Hunks)",
+      desc = "Git Diff",
     },
     {
       "<leader>gf",
       function()
-        Snacks.picker.git_log_file()
+        require("fzf-lua").git_bcommits()
       end,
       desc = "Git Log File",
     },

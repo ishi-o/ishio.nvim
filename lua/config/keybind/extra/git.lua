@@ -32,30 +32,29 @@ return {
       end,
       desc = "Diff file against branch",
     },
-    { "<leader>ghcc", "<cmd>GHCloseCommit<CR>", desc = "Close" },
-    { "<leader>ghce", "<cmd>GHExpandCommit<CR>", desc = "Expand" },
-    { "<leader>ghco", "<cmd>GHOpenToCommit<CR>", desc = "Open to" },
-    { "<leader>ghcp", "<cmd>GHPopOutCommit<CR>", desc = "Pop out" },
-    { "<leader>ghcz", "<cmd>GHCollapseCommit<CR>", desc = "Collapse" },
-    { "<leader>ghip", "<cmd>GHPreviewIssue<CR>", desc = "Preview" },
-    { "<leader>ghlt", "<cmd>LTPanel<CR>", desc = "Toggle: panel" },
-    { "<leader>ghpc", "<cmd>GHClosePR<CR>", desc = "Close" },
-    { "<leader>ghpd", "<cmd>GHPRDetails<CR>", desc = "Details" },
-    { "<leader>ghpe", "<cmd>GHExpandPR<CR>", desc = "Expand" },
-    { "<leader>ghpo", "<cmd>GHOpenPR<CR>", desc = "Open" },
-    { "<leader>ghpp", "<cmd>GHPopOutPR<CR>", desc = "PopOut" },
-    { "<leader>ghpr", "<cmd>GHRefreshPR<CR>", desc = "Refresh" },
-    { "<leader>ghpt", "<cmd>GHOpenToPR<CR>", desc = "Open to" },
-    { "<leader>ghpz", "<cmd>GHCollapsePR<CR>", desc = "Collapse" },
-    { "<leader>ghrb", "<cmd>GHStartReview<CR>", desc = "Begin" },
-    { "<leader>ghrc", "<cmd>GHCloseReview<CR>", desc = "Close" },
-    { "<leader>ghrd", "<cmd>GHDeleteReview<CR>", desc = "Delete" },
-    { "<leader>ghre", "<cmd>GHExpandReview<CR>", desc = "Expand" },
-    { "<leader>ghrs", "<cmd>GHSubmitReview<CR>", desc = "Submit" },
-    { "<leader>ghrz", "<cmd>GHCollapseReview<CR>", desc = "Collapse" },
-    { "<leader>ghtc", "<cmd>GHCreateThread<CR>", desc = "Create" },
-    { "<leader>ghtn", "<cmd>GHNextThread<CR>", desc = "Next" },
-    { "<leader>ghtt", "<cmd>GHToggleThread<CR>", desc = "Toggle thread" },
+    {
+      cond = function()
+        return _G.UserUtils.plugin_installed("octo.nvim")
+      end,
+      { "<leader>ghi", "<cmd>Octo issue list<CR>", desc = "List issues" },
+      { "<leader>ghp", "<cmd>Octo pr list<CR>", desc = "List pull requests" },
+      { "<leader>ghd", "<cmd>Octo discussion list<CR>", desc = "List discussions" },
+      { "<leader>ghn", "<cmd>Octo notification list<CR>", desc = "List notifications" },
+      {
+        "<leader>ghs",
+        function()
+          require("octo.utils").create_base_search_command({ include_current_repo = true })
+        end,
+        desc = "Search GitHub",
+      },
+      {
+        "<leader>ght",
+        function()
+          require("config.extra.git.octo").toggle_use_local_fs()
+        end,
+        desc = "Toggle use_local_fs",
+      },
+    },
     {
       { "[h", "<cmd>Gitsigns prev_hunk<CR>", desc = "Prev hunk" },
       { "]h", "<cmd>Gitsigns next_hunk<CR>", desc = "Next hunk" },

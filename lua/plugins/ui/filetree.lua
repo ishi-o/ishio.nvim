@@ -8,7 +8,7 @@ return {
       "MunifTanjim/nui.nvim",
     },
     config = function()
-      require("config.ui.filetree.neo-tree").setup()
+      require("config.ui.neotree").setup()
     end,
   },
 }

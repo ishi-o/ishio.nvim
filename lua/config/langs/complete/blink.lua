@@ -27,8 +27,8 @@ function M.setup()
         "snippet_backward",
         "fallback",
       },
-      ["<A-k>"] = { "select_prev", "fallback" },
-      ["<A-j>"] = { "select_next", "fallback" },
+      ["<C-k>"] = { "select_prev", "fallback" },
+      ["<C-j>"] = { "select_next", "fallback" },
     },
     appearance = {
       nerd_font_variant = "mono",

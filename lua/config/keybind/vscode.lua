@@ -102,8 +102,8 @@ local mappings = {
 
   -- Language tooling: completion
   map("<Tab>", "acceptSelectedSuggestion", "Confirm complete", "i"),
-  map("<A-k>", "selectPrevSuggestion", "Prev complete item", "i"),
-  map("<A-j>", "selectNextSuggestion", "Next complete item", "i"),
+  map("<C-k>", "selectPrevSuggestion", "Prev complete item", "i"),
+  map("<C-j>", "selectNextSuggestion", "Next complete item", "i"),
   map("<Tab>", "selectPrevSuggestion", "Prev complete item", "c"),
   map("<S-Tab>", "selectNextSuggestion", "Next complete item", "c"),
   map("<C-y>", "editor.action.triggerSuggest", "Toggle: complete panel", { "i", "c" }),
