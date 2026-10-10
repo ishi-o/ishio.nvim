@@ -1,23 +1,18 @@
 return {
   {
-    cond = function()
-      return _G.UserUtils.plugin_installed("snacks.nvim")
+    "]]",
+    function()
+      vim.fn.search("\\<" .. vim.fn.expand("<cword>") .. "\\>", "W")
     end,
-    {
-      "]]",
-      function()
-        Snacks.words.jump(vim.v.count1)
-      end,
-      desc = "Next Reference",
-      mode = { "n", "t" },
-      {
-        "[[",
-        function()
-          Snacks.words.jump(-vim.v.count1)
-        end,
-        desc = "Prev Reference",
-        mode = { "n", "t" },
-      },
-    },
+    desc = "Next Reference",
+    mode = { "n", "t" },
+  },
+  {
+    "[[",
+    function()
+      vim.fn.search("\\<" .. vim.fn.expand("<cword>") .. "\\>", "bW")
+    end,
+    desc = "Prev Reference",
+    mode = { "n", "t" },
   },
 }

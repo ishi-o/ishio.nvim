@@ -23,61 +23,6 @@ return {
     desc = "Toggle diagnostic (virtual lines)",
   },
   {
-    "<leader>uz",
-    "<cmd>lua Snacks.zen()<CR>",
-    desc = "Toggle zen mode",
-  },
-  {
-    "<leader>uZ",
-    "<cmd>lua Snacks.zen.zoom()<CR>",
-    desc = "Toggle zoom mode",
-  },
-  {
-    "<leader>uD",
-    (function()
-      local enabled = false
-      return function()
-        if enabled then
-          Snacks.dim.disable()
-        else
-          Snacks.dim.enable()
-        end
-        enabled = not enabled
-      end
-    end)(),
-    desc = "Toggle dim",
-  },
-  {
-    "<leader>ut",
-    (function()
-      local enabled = true
-      return function()
-        if enabled then
-          Snacks.indent.disable()
-        else
-          Snacks.indent.enable()
-        end
-        enabled = not enabled
-      end
-    end)(),
-    desc = "Toggle indent",
-  },
-  {
-    "<leader>uS",
-    (function()
-      local enabled = true
-      return function()
-        if enabled then
-          Snacks.scroll.disable()
-        else
-          Snacks.scroll.enable()
-        end
-        enabled = not enabled
-      end
-    end)(),
-    desc = "Toggle smooth scroll",
-  },
-  {
     "<leader>uc",
     function()
       local bg = vim.opt.background:get() or "light"

@@ -160,7 +160,7 @@ local mappings = {
   map("<leader>yb", "workbench.action.tasks.build", "Build"),
   map("<leader>yr", "workbench.action.debug.start", "Build & run"),
   map("<leader>yR", "workbench.action.tasks.runTask", "Run"),
-  map("<leader>yy", "workbench.action.tasks.showTasks", "Toggle: overseer panel"),
+  map("<leader>yy", "workbench.action.tasks.showTasks", "Toggle: tasks panel"),
   map("<leader>fy", "workbench.action.tasks.runTask", "Run lists"),
   map("<leader>fY", "workbench.action.tasks.showTasks", "Task actions"),
   command_palette_map("<leader>ta", "Attach to Test (Neotest)"),
